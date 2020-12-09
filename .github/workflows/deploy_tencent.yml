@@ -1,4 +1,4 @@
-name: 部署master代码到腾讯云函数
+name: 部署master分支代码到腾讯云函数
 
 on:
   workflow_dispatch:
