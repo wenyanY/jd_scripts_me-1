@@ -2,8 +2,12 @@ name: 部署master分支代码到腾讯云函数
 
 on:
   schedule:
-    - cron: '15 0,15 * * *'
+    - cron: '6 0,15 * * *'
   workflow_dispatch:
+  watch:
+    types: started
+  push:
+    branches: [ master ]
 
 jobs:
   build:
