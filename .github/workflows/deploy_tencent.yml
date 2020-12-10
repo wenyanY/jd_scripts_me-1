@@ -22,7 +22,9 @@ jobs:
           path: main
 
       - name: 查看目录
-        run: tree
+        run: |
+          sudo apt-get install tree
+          tree
 
       - name: checkoutMaster
         uses: actions/checkout@v2
