@@ -20,12 +20,6 @@ jobs:
           repository: ${{ github.repository }}
           ref: master
 
-      - name: 查看目录
-        run: |
-          sudo apt-get install tree
-          tree
-          pwd
-
       - name: checkoutMaster
         uses: actions/checkout@v2
         with:
@@ -34,6 +28,4 @@ jobs:
           path: main
 
       - name: 查看目录
-        run: |
-          cd main/
-          ls
+        run: mv -f main/serverless.yml serverless.yml
