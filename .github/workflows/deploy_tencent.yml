@@ -36,4 +36,4 @@ jobs:
       - name: 查看目录
         run: |
           tree
-          pwd
+          ls
