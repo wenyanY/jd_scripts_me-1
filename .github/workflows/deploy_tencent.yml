@@ -21,6 +21,11 @@ jobs:
           ref: main
           path: main
 
+      - name: 查看目录
+        run: |
+          pwd
+          ls
+
       - name: checkoutMaster
         uses: actions/checkout@v2
         with:
