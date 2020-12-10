@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - name: 检出main分支
+      - name: 检出master分支
         uses: actions/checkout@v2
         with:
           repository: ${{ github.repository }}
           ref: master
 
-      - name: 检出master分支
+      - name: 检出main分支
         uses: actions/checkout@v2
         with:
           repository: ${{ github.repository }}
