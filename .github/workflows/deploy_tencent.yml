@@ -28,4 +28,6 @@ jobs:
           ref: master
 
       - name: 覆盖serverless.yml文件
-        run: pwd
+        run: |
+          cd ..
+          ls
