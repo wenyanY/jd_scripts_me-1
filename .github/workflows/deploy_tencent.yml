@@ -25,6 +25,7 @@ jobs:
         run: |
           sudo apt-get install tree
           tree
+          pwd
 
       - name: checkoutMaster
         uses: actions/checkout@v2
@@ -33,4 +34,6 @@ jobs:
           ref: master
 
       - name: 覆盖serverless.yml文件
-        run: tree
+        run: |
+          tree
+          pwd
