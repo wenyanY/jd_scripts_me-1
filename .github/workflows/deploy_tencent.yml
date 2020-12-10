@@ -18,8 +18,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ github.repository }}
-          ref: main
-          path: main
+          ref: master
 
       - name: 查看目录
         run: |
@@ -31,8 +30,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ github.repository }}
-          ref: master
-          path: master
+          ref: main
+          path: main
 
       - name: 查看目录
         run: |
