@@ -14,11 +14,21 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - name: Checkout
+      - name: checkoutMain
         uses: actions/checkout@v2
         with:
           repository: ${{ github.repository }}
-          ref: 'master'
+          ref: main
+          path: main
+
+      - name: checkoutMaster
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
+          ref: master
+
+      - name: 覆盖serverless.yml文件
+        run: mv -f /main/serverless.yml serverless.yml
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
