@@ -22,9 +22,7 @@ jobs:
           path: main
 
       - name: 查看目录
-        run: |
-          pwd
-          ls
+        run: tree
 
       - name: checkoutMaster
         uses: actions/checkout@v2
@@ -33,6 +31,4 @@ jobs:
           ref: master
 
       - name: 覆盖serverless.yml文件
-        run: |
-          cd $GITHUB_WORKSPACE/main
-          ls
+        run: tree
