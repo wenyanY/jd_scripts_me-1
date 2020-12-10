@@ -32,8 +32,9 @@ jobs:
         with:
           repository: ${{ github.repository }}
           ref: master
+          path: master
 
-      - name: 覆盖serverless.yml文件
+      - name: 查看目录
         run: |
           tree
           pwd
