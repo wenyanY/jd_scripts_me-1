@@ -28,7 +28,7 @@ jobs:
           ref: master
 
       - name: 覆盖serverless.yml文件
-        run: mv -f /main/serverless.yml serverless.yml
+        run: mv -f main/serverless.yml serverless.yml
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
