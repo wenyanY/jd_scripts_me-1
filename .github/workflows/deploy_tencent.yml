@@ -29,5 +29,5 @@ jobs:
 
       - name: 覆盖serverless.yml文件
         run: |
-          cd ${{ GITHUB_WORKSPACE }}/main
+          cd $GITHUB_WORKSPACE/main
           ls
