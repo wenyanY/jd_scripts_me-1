@@ -28,10 +28,10 @@ jobs:
           path: main
 
       - name: 替换自己的文件
-        run: |
+        run: mv -f main/index.js index.js
 #          mv -f main/serverless.yml serverless.yml
 #          mv -f main/jd_bean_sign.js jd_bean_sign.js
-          mv -f main/index.js index.js
+#          mv -f main/index.js index.js
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
