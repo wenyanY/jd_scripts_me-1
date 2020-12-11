@@ -2,7 +2,7 @@
 name: 同步大佬代码
 on:
   schedule:
-    - cron: '55 23,14 * * *'
+    - cron: '5 0,15 * * *'
   workflow_dispatch:
 jobs:
   repo-sync:
