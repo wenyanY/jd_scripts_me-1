@@ -23,3 +23,9 @@ jobs:
           source_branch: "master"
           destination_branch: "master"
           github_token: ${{ secrets.PAT }}
+            
+      - name: Notify To Telegram
+        run: |
+          curl -s -o /dev/null -X POST https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage \
+          -H "Content-Type: application/json" \
+          --data '{"text": "同步大佬代码完成","chat_id": "${{ secrets.TG_USER_ID }}"}'
