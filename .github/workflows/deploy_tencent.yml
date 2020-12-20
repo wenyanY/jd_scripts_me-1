@@ -64,8 +64,6 @@ jobs:
           if [ $PUSH_KEY ]; then sed -i "/variables/a\      PUSH_KEY: $PUSH_KEY" serverless.yml; fi;
           if [ $BARK_PUSH ]; then sed -i "/variables/a\      BARK_PUSH: $BARK_PUSH" serverless.yml; fi;
           if [ $BARK_SOUND ]; then sed -i "/variables/a\      BARK_SOUND: $BARK_SOUND" serverless.yml; fi;
-          if [ $TG_BOT_TOKEN ]; then sed -i "/variables/a\      TG_BOT_TOKEN: $TG_BOT_TOKEN" serverless.yml; fi;
-          if [ $TG_USER_ID ]; then sed -i "/variables/a\      TG_USER_ID: $TG_USER_ID" serverless.yml; fi;
           if [ $DD_BOT_TOKEN ]; then sed -i "/variables/a\      DD_BOT_TOKEN: $DD_BOT_TOKEN" serverless.yml; fi;
           if [ $DD_BOT_SECRET ]; then sed -i "/variables/a\      DD_BOT_SECRET: $DD_BOT_SECRET" serverless.yml; fi;
           if [ $IGOT_PUSH_KEY ]; then sed -i "/variables/a\      IGOT_PUSH_KEY: $IGOT_PUSH_KEY" serverless.yml; fi;
@@ -106,8 +104,6 @@ jobs:
           PUSH_KEY: ${{ secrets.PUSH_KEY}}
           BARK_PUSH: ${{ secrets.BARK_PUSH}}
           BARK_SOUND: ${{ secrets.BARK_SOUND}}
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN}}
-          TG_USER_ID: ${{ secrets.TG_USER_ID}}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN}}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET}}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY}}
