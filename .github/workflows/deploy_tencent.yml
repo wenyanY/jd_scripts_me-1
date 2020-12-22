@@ -147,4 +147,4 @@ jobs:
         run: |
           curl -s -o /dev/null -X POST https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage \
           -H "Content-Type: application/json" \
-          --data '{"text": "部署master分支代码腾讯云函数完成！","chat_id": "${{ secrets.TG_USER_ID }}"}'
+          --data '{"text": "${{github.workflow}}完成！","chat_id": "${{ secrets.TG_USER_ID }}"}'
