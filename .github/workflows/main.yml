@@ -16,13 +16,13 @@ jobs:
       
       - name: sync lxk0301-scripts
         uses: repo-sync/github-sync@v2
-        if: env.PAT
+        if: secrets.PAT
         with:
           source_repo: "https://github.com/lxk0301/jd_scripts.git"
           source_branch: "master"
           destination_branch: "master"
           github_token: ${{ secrets.PAT }}
-            
+          
       - name: 触发部署到腾讯云函数
         if: github.event.schedule #只有定时任务才触发部署
         run: |
