@@ -1,5 +1,5 @@
 # File: .github/workflows/repo-sync.yml
-name: 同步大佬代码
+name: 同步大佬代码并触发部署到腾讯云函数
 on:
   schedule:
     - cron: '5 0,15 * * *'
@@ -24,8 +24,20 @@ jobs:
           destination_branch: "master"
           github_token: ${{ secrets.PAT }}
             
+      - name: 触发部署到腾讯云函数
+#        if: github.event.sender.type != User
+        run: |
+          curl \
+            -X POST
+            -H "Accept: application/vnd.github.v3+json"
+            -H "Authorization: token ${{ secrets.PAT }}"
+            -d '{"ref":"master"}'
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy_tencent_scf.yml/dispatches
+
       - name: Notify To Telegram
         run: |
-          curl -s -o /dev/null -X POST https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage \
-          -H "Content-Type: application/json" \
-          --data '{"text": "${{github.workflow}}完成！","chat_id": "${{ secrets.TG_USER_ID }}"}'
+          curl \
+            -s -o /dev/null \
+            -X POST https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage \
+            -H "Content-Type: application/json" \
+            --data '{"text": "${{github.workflow}}完成！","chat_id": "${{ secrets.TG_USER_ID }}"}'
