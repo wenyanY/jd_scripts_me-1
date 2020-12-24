@@ -40,5 +40,5 @@ jobs:
             -s -o /dev/null \
             -X POST \
             -H "Content-Type: application/json" \
-            -d '{"text": "${{github.workflow}}完成！","chat_id": "${{ secrets.TG_USER_ID }}"}' \
+            -d '{"text": "${{github.workflow}} 运行成功！","chat_id": "${{ secrets.TG_USER_ID }}"}' \
             https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage
