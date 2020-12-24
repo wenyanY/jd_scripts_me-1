@@ -28,15 +28,17 @@ jobs:
 #        if: github.event.sender.type != User
         run: |
           curl \
-            -X POST https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy_tencent_scf.yml/dispatches \
+            -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.PAT }}" \
-            -d '{"ref":"master"}'
+            -d '{"ref":"master"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy_tencent_scf.yml/dispatches
 
       - name: Notify To Telegram
         run: |
           curl \
             -s -o /dev/null \
-            -X POST https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage \
+            -X POST \
             -H "Content-Type: application/json" \
-            -d '{"text": "${{github.workflow}}完成！","chat_id": "${{ secrets.TG_USER_ID }}"}'
+            -d '{"text": "${{github.workflow}}完成！","chat_id": "${{ secrets.TG_USER_ID }}"}' \
+            https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage
