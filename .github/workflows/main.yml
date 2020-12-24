@@ -26,7 +26,7 @@ jobs:
           github_token: ${{ env.PAT }}
           
       - name: 触发部署到腾讯云函数
-        if: github.event.schedule #只有定时任务才触发部署
+        if: env.PAT && github.event.schedule  #只有定时任务才触发部署
         run: |
           curl \
             -X POST \
