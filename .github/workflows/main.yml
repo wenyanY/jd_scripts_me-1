@@ -25,7 +25,7 @@ jobs:
           github_token: ${{ secrets.PAT }}
             
       - name: 触发部署到腾讯云函数
-        if: github.event.sender.type != User
+        if: github.event.sender.type != 'User'
         run: |
           curl \
             -X POST \
