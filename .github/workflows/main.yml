@@ -39,7 +39,7 @@ jobs:
           git config --global user.email VIP2925757292@gmail.com
           git config --global user.name ${{ github.repository_owner }}
           git config pull.rebase false
-          git pull --allow-unrelated-history
+          git pull
           git add index.js
           git commit -m 'update index.js'
           git push -u origin master -f
