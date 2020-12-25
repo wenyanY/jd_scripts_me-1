@@ -61,5 +61,5 @@ jobs:
             -s -o /dev/null \
             -X POST \
             -H "Content-Type: application/json" \
-            -d '{"text": "${{github.workflow}} 运行成功！","chat_id": "${{TG_USER_ID}}"}' \
-            https://api.telegram.org/bot${{TG_BOT_TOKEN}}/sendMessage
+            -d '{"text": "${{github.workflow}} 运行成功！","chat_id": "${{ env.TG_USER_ID }}"}' \
+            https://api.telegram.org/bot${{ env.TG_BOT_TOKEN }}/sendMessage
