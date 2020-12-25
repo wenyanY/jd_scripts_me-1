@@ -26,21 +26,22 @@ jobs:
           destination_branch: "master"
           github_token: ${{ env.PAT }}
 
-#      - name: update index.js
-#        run: |
-#          sed -i \
-#          -e 's#//delete#delete#' \
-#          -e 's#//require(#require(#' \
-#          -e 's#      var request#//      var request#' \
-#          -e 's#      request(#//      request(#' \
-#          -e 's#        eval(#//        eval(#' \
-#          -e 's#      })#//      })#' \
-#          index.js
-#          git config --global user.email VIP2925757292@gmail.com
-#          git config --global user.name AfeirWu
-#          git add index.js
-#          git commit -m 'update index.js'
-#          git push
+      - name: update index.js
+        run: |
+          sed -i \
+          -e 's#//delete#delete#' \
+          -e 's#//require(#require(#' \
+          -e 's#      var request#//      var request#' \
+          -e 's#      request(#//      request(#' \
+          -e 's#        eval(#//        eval(#' \
+          -e 's#      })#//      })#' \
+          index.js
+          git config --global user.email VIP2925757292@gmail.com
+          git config --global user.name AfeirWu
+          git pull
+          git add index.js
+          git commit -m 'update index.js'
+          git push
 
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event.schedule  #只有定时任务才触发部署
