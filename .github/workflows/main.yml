@@ -38,6 +38,7 @@ jobs:
           index.js
           git config --global user.email VIP2925757292@gmail.com
           git config --global user.name AfeirWu
+          git config pull.rebase false
           git pull
           git add index.js
           git commit -m 'update index.js'
