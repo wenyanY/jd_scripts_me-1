@@ -25,6 +25,8 @@ jobs:
         with:
           repository: ${{ github.repository }}
           ref: master
+
+      - name: update index.js
         run: |
           sed -i \
           -e 's#//delete#delete#' \
