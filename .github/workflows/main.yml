@@ -42,7 +42,7 @@ jobs:
           git pull
           git add index.js
           git commit -m 'update index.js'
-          git push
+          git push -f
 
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event.schedule  #只有定时任务才触发部署
