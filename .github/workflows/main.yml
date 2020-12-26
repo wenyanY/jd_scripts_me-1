@@ -37,11 +37,11 @@ jobs:
           -e 's#      })#//      })#' \
           index.js
 
-      - name: Add & Commit
-        uses: EndBug/add-and-commit@v6.2.0
-        with:
-          token: ${{ env.PAT }}
-          branch: 'master'
+#      - name: Add & Commit
+#        uses: EndBug/add-and-commit@v6.2.0
+#        with:
+#          token: ${{ env.PAT }}
+#          branch: 'master'
 
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
