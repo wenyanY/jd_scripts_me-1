@@ -46,7 +46,7 @@ jobs:
 #          git push -u origin master -f
 
       - name: Git Commit and Push Force
-        uses: rahularyan/commit@1.0.0\
+        uses: rahularyan/commit@1.0.0
         with:
           github-token: ${{ env.PAT }}
           push-branch: 'master'
