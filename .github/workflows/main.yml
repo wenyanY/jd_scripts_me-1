@@ -25,7 +25,7 @@ jobs:
           destination_branch: "master"
           github_token: ${{ env.PAT }}
 
-      - name: update index.js
+      - name: 修改文件
         run: |
           sed -i \
           -e 's#//delete#delete#' \
@@ -35,14 +35,14 @@ jobs:
           -e 's#        eval(#//        eval(#' \
           -e 's#      })#//      })#' \
           index.js
+          cat index.js
 
       - name: Git Commit and Push Force
-        if: ${{ success() }}
         uses: rahularyan/commit@1.0.0
         with:
           github-token: ${{ env.PAT }}
           push-branch: 'master'
-          commit-message: update index.js 
+          commit-message: 修改index.js
 
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
