@@ -43,6 +43,7 @@ jobs:
         with:
           github-token: ${{ env.PAT }}
           push-branch: 'master'
+          commit-message: update index.js 
 
       - name: 触发部署到腾讯云函数
         if: ${{ success() }} && env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
