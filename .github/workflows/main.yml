@@ -46,7 +46,12 @@ jobs:
 #          git push -u origin master -f
 
       - name: Git Commit and Push Force
-        uses: rahularyan/commit@1.0.0
+        uses: rahularyan/commit@1.0.0\
+        with:
+          github-token: ${{ env.PAT }}
+          push-branch: 'master'
+          force-add: 'true'
+          files: index.js
 
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
