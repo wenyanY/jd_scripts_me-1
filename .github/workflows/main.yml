@@ -26,7 +26,6 @@ jobs:
           github_token: ${{ env.PAT }}
 
       - name: update index.js
-        if: ${{ success() }}
         run: |
           sed -i \
           -e 's#//delete#delete#' \
@@ -46,7 +45,7 @@ jobs:
           commit-message: update index.js 
 
       - name: 触发部署到腾讯云函数
-        if: ${{ success() }} && env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
+        if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
         run: |
           curl \
             -X POST \
