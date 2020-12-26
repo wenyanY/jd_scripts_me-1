@@ -36,15 +36,14 @@ jobs:
           -e 's#        eval(#//        eval(#' \
           -e 's#      })#//      })#' \
           index.js
+          git add index.js
+          git commit -m "Add changes" -a
 
-      - name: Git Commit and Push Force
-        uses: actions-go/push@v1
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
         with:
-          token: ${{ env.PAT }}
-          ref: 'master'
-          remote-ref: 'master'
-          force: 'true'
-          commit-message: 111
+          github_token: ${{ env.PAT }}
+          branch: 'master'
 
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
