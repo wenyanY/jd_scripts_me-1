@@ -1,16 +1,15 @@
 name: 同步大佬代码并触发部署
+env:
+  PAT: ${{ secrets.PAT }}
+  TG_USER_ID: ${{ secrets.TG_USER_ID }}
+  TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
 on:
   schedule:
     - cron: '5 0,15 * * *'
   workflow_dispatch:
 jobs:
   repo-sync:
-    env:
-      PAT: ${{ secrets.PAT }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - uses: actions/checkout@v2
         with:
@@ -27,6 +26,7 @@ jobs:
           github_token: ${{ env.PAT }}
 
       - name: update index.js
+        if: ${{ success() }}
         run: |
           sed -i \
           -e 's#//delete#delete#' \
@@ -46,6 +46,7 @@ jobs:
 #          git push -u origin master -f
 
       - name: Git Commit and Push Force
+        if: ${{ success() }}
         uses: rahularyan/commit@1.0.0
         with:
           github-token: ${{ env.PAT }}
@@ -54,7 +55,7 @@ jobs:
           files: index.js
 
       - name: 触发部署到腾讯云函数
-        if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
+        if: ${{ success() }} && env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
         run: |
           curl \
             -X POST \
