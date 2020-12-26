@@ -38,10 +38,13 @@ jobs:
           index.js
 
       - name: Git Commit and Push Force
-        uses: dciborow/commit@0.0.1
+        uses: actions-go/push@v1
         with:
-          github-token: ${{ env.PAT }}
-          push-branch: 'master'
+          token: ${{ env.PAT }}
+          ref: 'master'
+          remote-ref: 'master'
+          force: 'true'
+          commit-message: 111
 
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
