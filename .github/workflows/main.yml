@@ -1,15 +1,16 @@
 name: 同步大佬代码并触发部署
-env:
-  PAT: ${{ secrets.PAT }}
-  TG_USER_ID: ${{ secrets.TG_USER_ID }}
-  TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
 on:
   schedule:
     - cron: '5 0,15 * * *'
   workflow_dispatch:
+
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
+    env:
+      PAT: ${{ secrets.PAT }}
+      TG_USER_ID: ${{ secrets.TG_USER_ID }}
+      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -35,14 +36,12 @@ jobs:
           -e 's#        eval(#//        eval(#' \
           -e 's#      })#//      })#' \
           index.js
-          cat index.js
 
       - name: Git Commit and Push Force
-        uses: rahularyan/commit@1.0.0
+        uses: dciborow/commit@0.0.1
         with:
           github-token: ${{ env.PAT }}
           push-branch: 'master'
-          commit-message: 修改index.js
 
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
