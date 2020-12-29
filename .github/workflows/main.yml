@@ -14,11 +14,7 @@ jobs:
       DEPLOY_TG_BOT_TOKEN: ${{ secrets.DEPLOY_TG_BOT_TOKEN }}
       editIndexJsFile: ${{ secrets.editIndexJsFile }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: ${{ github.repository }}
-          ref: master
-
+      
       - name: sync lxk0301-scripts
         uses: repo-sync/github-sync@v2
         if: env.PAT
@@ -27,7 +23,12 @@ jobs:
           source_branch: "master"
           destination_branch: "master"
           github_token: ${{ env.PAT }}
-
+      
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
+          ref: master
+      
       - name: 修改index.js文件信息
         if: env.editIndexJsFile == 'true'
         run: |
