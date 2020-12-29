@@ -14,7 +14,9 @@ jobs:
       DEPLOY_TG_BOT_TOKEN: ${{ secrets.DEPLOY_TG_BOT_TOKEN }}
       editIndexJsFile: ${{ secrets.editIndexJsFile }}
     steps:
-      
+     
+      - uses: actions/checkout@v2
+     
       - name: sync lxk0301-scripts
         uses: repo-sync/github-sync@v2
         if: env.PAT
