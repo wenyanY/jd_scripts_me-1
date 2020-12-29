@@ -45,10 +45,11 @@ jobs:
         run: |
           base64Str=`cat index.js | base64 -w 0`
           curl \
+            -s -o /dev/null \
             -X PUT \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ env.PAT }}" \
-            -d '{"message":"修改index.js","content":"'$base64Str'","sha":"'$sha'"}' \
+            -d '{"branch":"master","message":"修改index.js","content":"'$base64Str'","sha":"'$sha'"}' \
             https://api.github.com/repos/${{ github.repository }}/contents/index.js
       
       - name: 触发部署到腾讯云函数
