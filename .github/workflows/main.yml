@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PAT: ${{ secrets.PAT }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+      DEPLOY_PUSH_KEY: ${{ secrets.DEPLOY_PUSH_KEY }}
+      DEPLOY_TG_USER_ID: ${{ secrets.DEPLOY_TG_USER_ID }}
+      DEPLOY_TG_BOT_TOKEN: ${{ secrets.DEPLOY_TG_BOT_TOKEN }}
       editIndexJsFile: ${{ secrets.editIndexJsFile }}
     steps:
       - uses: actions/checkout@v2
@@ -63,11 +64,18 @@ jobs:
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy_tencent_scf.yml/dispatches
 
       - name: Notify To Telegram
-        if: env.TG_USER_ID && env.TG_BOT_TOKEN
+        if: env.DEPLOY_TG_USER_ID && env.DEPLOY_TG_BOT_TOKEN
         run: |
           curl \
             -s -o /dev/null \
             -X POST \
             -H "Content-Type: application/json" \
-            -d '{"text": "${{github.workflow}} 运行成功！","chat_id": "${{ env.TG_USER_ID }}"}' \
-            https://api.telegram.org/bot${{ env.TG_BOT_TOKEN }}/sendMessage
+            -d '{"text": "${{github.workflow}} 完成！","chat_id": "${{ env.DEPLOY_TG_USER_ID }}"}' \
+            https://api.telegram.org/bot${{ env.DEPLOY_TG_BOT_TOKEN }}/sendMessage
+      
+      - name: Notify To Server酱
+        if: env.DEPLOY_PUSH_KEY
+        run: |
+          curl -s -o /dev/null -X POST https://sc.ftqq.com/${{ env.DEPLOY_PUSH_KEY }}.send \
+          -H "Content-Type: application/x-www-form-urlencoded" \
+          --data 'text=${{ github.workflow }} 完成！&desp=${{ github.workflow }} 完成！'
