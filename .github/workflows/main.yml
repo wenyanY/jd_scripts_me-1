@@ -11,6 +11,7 @@ jobs:
       PAT: ${{ secrets.PAT }}
       TG_USER_ID: ${{ secrets.TG_USER_ID }}
       TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+      editIndexJsFile: ${{ secrets.editIndexJsFile }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -26,8 +27,10 @@ jobs:
           destination_branch: "master"
           github_token: ${{ env.PAT }}
 
-      - name: 修改文件信息
+      - name: 修改index.js文件信息
+        if: env.editIndexJsFile == 'true'
         run: |
+          echo "sha=`git hash-object index.js`" >> $GITHUB_ENV
           sed -i \
           -e 's#//delete#delete#' \
           -e 's#//require(#require(#' \
@@ -37,12 +40,17 @@ jobs:
           -e 's#      })#//      })#' \
           index.js
 
-#      - name: Add & Commit
-#        uses: EndBug/add-and-commit@v6.2.0
-#        with:
-#          token: ${{ env.PAT }}
-#          branch: 'master'
-
+      - name: 提交index.js文件
+        if: env.editIndexJsFile == 'true'
+        run: |
+          base64Str=`cat index.js | base64 -w 0`
+          curl \
+            -X PUT \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ env.PAT }}" \
+            -d '{"message":"修改index.js","content":"'$base64Str'","sha":"'$sha'"}' \
+            https://api.github.com/repos/${{ github.repository }}/contents/index.js
+      
       - name: 触发部署到腾讯云函数
         if: env.PAT && github.event_name == 'schedule'  #只有定时任务才触发部署
         run: |
