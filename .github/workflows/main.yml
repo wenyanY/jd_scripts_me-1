@@ -14,7 +14,6 @@ jobs:
       DEPLOY_TG_BOT_TOKEN: ${{ secrets.DEPLOY_TG_BOT_TOKEN }}
       editIndexJsFile: ${{ secrets.editIndexJsFile }}
     steps:
-     
       - uses: actions/checkout@v2
      
       - name: sync lxk0301-scripts
