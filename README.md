@@ -7,4 +7,4 @@
 | `DEPLOY_TG_BOT_TOKEN`         |telegram推送             | 非必须 |
 | `DEPLOY_TG_USER_ID`           |telegram推送             | 非必须 |
 | `DEPLOY_PUSH_KEY`             |微信server酱推送          | 非必须 |
-| `editIndexJsFile`             |是否编辑index.js文件      | 非必须 | 
+| `editIndexJsFile`             |是否编辑index.js文件(填 true/false)      | 非必须 | 
