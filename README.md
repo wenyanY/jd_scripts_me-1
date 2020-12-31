@@ -6,7 +6,7 @@
 ####2.要禁用`sync-lxk0301-scripts`这个workflow，效果如下图:
 ![img_1.png](icon/img_1.png)
 
-##### 使用到的环境变量：
+### 使用到的环境变量：
 | Name                          |   归属                  | 属性        |
 | :---------------------:       | :----------:           | --------- | 
 | `PAT`                         |Personal access token   | 必须 | 
